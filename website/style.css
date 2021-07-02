@@ -5,9 +5,9 @@ body{
 
 #app{
     display: grid;
-    grid-auto-rows: minmax(150px, auto);
+    grid-auto-rows: minmax(50px, auto);
     /* grid-template-columns:  */
-    height:100vh;
+    height:100%;
     background: #f23557;
     color: #f0d43a;
     justify-content: center;
@@ -22,6 +22,9 @@ body{
 
 .entry{
     background: rgba(59, 74, 107, .4);
+    height: 25vh;
+    width: 400px;
+    text-align: center;
 }
 
 #entryHolder{
@@ -29,7 +32,7 @@ body{
 }
 
 #date{
-
+    color:black;
 }
 
 #temp{
@@ -41,7 +44,7 @@ body{
 }
 
 .headline {
-
+    height: min-content;
 }
 .title{
 
@@ -73,6 +76,9 @@ button{
     font-family: 'Oswald', sans-serif;
     border: none;
     box-shadow: 2px 4px 5px #444;
+}
+button:hover{
+    background: #3f4e6e;
 }
 h1{
     font-size: 36px;
