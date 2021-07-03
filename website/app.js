@@ -3,7 +3,7 @@
 
 // Create a new date instance dynamically with JS
 let d = new Date();
-let newDate = d.getMonth()+'.'+ d.getDate()+'.'+ d.getFullYear();
+let newDate = d.getMonth()+1+'.'+ d.getDate()+'.'+ d.getFullYear();
 
 // listener to button click
 document.getElementById('generate').addEventListener('click', performAction);
@@ -12,6 +12,10 @@ function performAction(){
     // access values from user
     const zipCode = document.getElementById('zip').value;
     const feelings = document.getElementById('feelings').value;
+    if(!zipCode || !feelings){
+        alert('Please fill all the fields');
+        return;
+    }
     // chaining promises
     getWeather(zipCode)
     .then(function(data){
@@ -28,12 +32,15 @@ function updateErase(){
 const getWeather = async (zipCode)=>{
     const apiKey = 'debdd1dcdd2e3fa985e31c252c3049d0'
     const baseURL = `http://api.openweathermap.org/data/2.5/weather?zip=${zipCode}&units=metric&appid=${apiKey}`
-        const res = await fetch(baseURL)
+    const res = await fetch(baseURL)
     try {
         const data = await res.json();
+        if(res.status !== 200){
+            alert(data.message);
+            throw new Error(data.message);
+        }
         return data;
-    }
-    catch(error) {
+    } catch(error) {
         console.log(error);
     }
 }
@@ -51,9 +58,10 @@ const postData = async (url= '', data = {})=>{
 
     try {
         const newData = await response.json();
-        return newData
+        return newData;
     } catch(error) {
-        console.log("error", error);
+        console.log(error);
+        alert(error);
     }
 }
 
@@ -70,5 +78,6 @@ const updateUI = async () => {
     }
     catch(error){
         console.log(error);
+        alert(error);
     }
 }
